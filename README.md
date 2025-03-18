@@ -1,1 +1,1 @@
-# TSC_EBookReader
+# TSC-EBookReader
