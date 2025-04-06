@@ -19,7 +19,7 @@ Proiectul include atat partea de incarcare si monitorizare a bateriei, cat si st
 - Am generat modele 3D pentru a verifica compatibilitatea mecanica si pozitionarea componentelor in carcasa.
 ---
 
-## 🛠️ Diagrama Bloc
+## Diagrama Bloc
 
 ```text
          +------------+
