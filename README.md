@@ -3,7 +3,7 @@
 
 ## Descriere Generala
 
-Acest proiect a fost realizat ca parte dintr-un curs practic de microprocesoare si reprezinta un sistem integrat cu afisaj E-Paper, conectivitate wireless si mai multi senzori. Totul este construit in jurul microcontrollerului ESP32-C6, care ofera suport pentru WiFi 6 si Bluetooth LE.
+Acest proiect reprezinta un sistem integrat cu afisaj E-Paper, conectivitate wireless si mai multi senzori. Totul este construit in jurul microcontrollerului ESP32-C6, care ofera suport pentru WiFi 6 si Bluetooth LE.
 
 Am urmarit sa integrez mai multe componente utile intr-un design cat mai compact, usor de extins si eficient energetic. Proiectul include atat partea de incarcare si monitorizare a bateriei, cat si stocare externa si masurare a conditiilor de mediu.
 
@@ -11,9 +11,9 @@ Am urmarit sa integrez mai multe componente utile intr-un design cat mai compact
 
 ## Etapele de Implementare
 
-- Am inceput cu realizarea schemei electrice in EAGLE, conectand toate componentele relevante la ESP32-C6.
-- Apoi am trecut la layout-ul PCB-ului in 2D, unde am acordat atentie speciala rutarii liniilor de date si alimentare.
-- Am creat planuri de masa (GND plane) atat pe stratul superior, cat si inferior pentru stabilitate electrica si protectie EMI.
+- Am inceput cu realizarea schemei electrice, conectand toate componentele relevante la ESP32-C6.
+- Apoi am trecut la layout-ul PCB-ului in 2D, unde am rutat liniile de date si alimentare.
+- Am creat planuri de masa (GND plane) atat pe stratul superior, cat si inferior.
 - Am folosit reguli custom pentru latimea traseelor de alimentare si distantele minime fata de alte semnale.
 - Conectorii au fost pozitionati astfel incat sa fie usor accesibili (ex: Qwiic pentru senzori externi).
 - Am adaugat pad-uri de test (TP) pentru debugging mai usor dupa asamblare.
@@ -67,7 +67,6 @@ Display-ul este controlat de un circuit dedicat si are o sursa separata de alime
 
 ## Organizare si Design
 
-Am incercat sa pastrez un design cat mai ordonat:
 - toate traseele SPI sunt protejate cu diode TVS
 - planul de masa continua asigura stabilitate si reduce zgomotul
 - componentele sunt grupate logic: senzorii, zona de alimentare, zona de afisaj etc.
@@ -76,43 +75,44 @@ Am incercat sa pastrez un design cat mai ordonat:
 
 ---
 
-## ℹObservatii Finale
+## Observatii Finale
 
-Proiectul este gandit modular, astfel incat sa poata fi adaptat usor pentru alte aplicatii (ex: afisaj meteo, cititor e-book, dashboard smart home etc). PCB-ul este pregatit pentru productia in serie mica si se poate integra usor intr-o carcasa printata 3D.
+Proiectul este gandit modular, astfel incat sa poata fi adaptat usor pentru alte aplicatii (ex: afisaj meteo, cititor e-book, dashboard smart home etc). Placa a fost gandita astfel incat sa poata fi usor produsa in mai multe exemplare si sa intre fara probleme intr-o carcasa printata 3D.
 
 
 ## Diagrama Bloc 
-
-                    +------------------+
-                    |     Baterie      |
-                    +--------+---------+
-                             |
-                             v
-                    +------------------+
-                    |  Charging IC     |<--- USB-C
-                    +--------+---------+
-                             |
-                             v
-                    +------------------+
-                    |       LDO        | --> 3.3V
-                    +--------+---------+
-                             |
-      +----------+----------+-------------+-----------+-------------+
-      |          |                        |           |             |
-      v          v                        v           v             v
-+----------+ +----------+        +----------------+ +----------+ +----------+
-|  ESP32   | |  E-Paper |<------>|   BME688       | |   RTC    | |  Butoane |
-|   -C6    | |  Display | (SPI)  | (I2C)           | (I2C)      | (Reset/IO)|
-+----------+ +----------+        +----------------+ +----------+ +----------+
-      |          ^
-      |          |
-      |          |
-      |    +-----+----------+
-      |    |    Flash NOR   |
-      |    |     (SPI)      |
-      |    +----------------+
-      |
-+----------------+
-|    SD Card     |
-|     (SPI)      |
-+----------------+
+```text
+         +------------+
+         |  Baterie   |
+         +------------+
+               |
+               v
+       +----------------+
+       |  Charging IC   |<-- USB-C
+       +----------------+
+               |
+               v
+       +----------------+
+       |      LDO       | --> 3.3V
+       +----------------+
+               |
+      +--------+--------+--------+--------+--------+
+      v        v        v        v        v
+   +------+ +--------+ +------+ +------+ +--------+
+   | ESP  | |Display | | RTC  | | BME  | | Butoane|
+   | -C6  | |(SPI)   | |(I2C) | |(I2C) | |(GPIO)  |
+   +------+ +--------+ +------+ +------+ +--------+
+               |
+               v
+           +---------+
+           | Flash   |
+           |  NOR    |
+           | (SPI)   |
+           +---------+
+               |
+               v
+           +---------+
+           | SD Card |
+           |  (SPI)  |
+           +---------+
+```
