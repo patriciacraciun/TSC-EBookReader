@@ -19,6 +19,18 @@ Proiectul include atat partea de incarcare si monitorizare a bateriei, cat si st
 - Am generat modele 3D pentru a verifica compatibilitatea mecanica si pozitionarea componentelor in carcasa.
 ---
 
+![Screenshot 2025-04-14 141623](https://github.com/user-attachments/assets/b81c3772-2c33-4e30-8e0d-29deec015ea7)
+
+![Screenshot 2025-04-14 141532](https://github.com/user-attachments/assets/a08d443f-f194-4cc3-ad77-3c7d399e2723)
+
+![Screenshot 2025-04-14 141027](https://github.com/user-attachments/assets/a3fc8d4f-1cfa-48fe-b3b7-7fc9faa0895d)
+
+![Screenshot 2025-04-14 140928](https://github.com/user-attachments/assets/cbd895ce-ce49-4e79-9625-77ca70f6cb3e)
+
+![Screenshot 2025-04-14 140846](https://github.com/user-attachments/assets/82f70fa5-8ea2-4f6e-872e-7d7ba9e42f8b)
+
+
+
 ## Diagrama Bloc
 
 ```text
